@@ -46,7 +46,7 @@ function display_record_table($result){
     while ($row = $result->fetch_assoc()){
         # display rows and columns of data
         echo '<tr>';
-        echo "<td>Update&nbsp;&nbsp;|&nbsp;&nbsp;<a href=\"delete-record.php?id={$row['id']}\" onclick=\"return confirm('Are you sure?');\">Delete</a></td>";
+        echo "<td><a href=\"update-record.php?pid={$row['id']}\">Update</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href=\"delete-record.php?id={$row['id']}\" onclick=\"return confirm('Are you sure?');\">Delete</a></td>";
         echo "<td>{$row['student_id']}</td>";
         echo "<td><strong>{$row['first_name']}</strong></td>";
         echo "<td><strong>{$row['last_name']}</strong></td>";
@@ -73,5 +73,12 @@ function display_error_bucket($error_bucket){
         echo '</ul>';
     echo '</div>';
     echo '<p>All of these fields are required. Please fill them in.</p>';
+}
+
+function echoActiveClassIfRequestMatches($requestUri){
+    $current_file_name = basename($_SERVER['REQUEST_URI'], ".php");
+
+    if ($current_file_name == $requestUri)
+        echo 'active';
 }
 ?>

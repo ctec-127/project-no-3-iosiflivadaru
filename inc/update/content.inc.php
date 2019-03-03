@@ -9,13 +9,14 @@ $error_bucket = [];
 // http://php.net/manual/en/mysqli.real-escape-string.php
 
 if($_SERVER['REQUEST_METHOD']=="POST"){
+    if (!empty($_POST['pid'])) {
+        $pid = $_POST['pid'];
+    }
     // First insure that all required fields are filled in
     if (empty($_POST['first'])) {
         array_push($error_bucket,"<p>A first name is required.</p>");
-    } else {
-        # Old way
-        #$first = $_POST['first'];
-        # New way
+    } else {        
+        #$first = $_POST['first'];        
         $first = $db->real_escape_string($_POST['first']);
     }
 
@@ -63,8 +64,6 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
     if (empty($_POST['degree'])) {
         array_push($error_bucket,"<p>A Degree Program is required.</p>");
-    } else if ($_POST['degree'] == "Choose...") {
-        array_push($error_bucket,"<p>A Degree Program is required.</p>");
     } else {
         #$degree = $_POST['degree'];
         $degree = $db->real_escape_string($_POST['degree']);
@@ -73,9 +72,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     // If we have no errors than we can try and insert the data
     if (count($error_bucket) == 0) {
         // Time for some SQL
-        $sql = "INSERT INTO $db_table (first_name,last_name,student_id,email,phone,degree_program,gpa,financial_aid) ";
-        $sql .= "VALUES ('$first','$last',$id,'$email','$phone','$degree','$gpa','$financial')";
-
+        $sql = "UPDATE $db_table SET first_name='$first', last_name='$last', student_id=$id, email='$email', phone='$phone', gpa=$gpa, financial_aid='$financial', degree_program='$degree' WHERE id=$pid";
         // comment in for debug of SQL
         // echo $sql;
 
@@ -89,18 +86,36 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
             I saved that new record for you!
           </div>';
         //   the funtion unset() is making the variables empty
-            unset($first);
-            unset($last);
-            unset($id);
-            unset($email);
-            unset($phone);
-            unset($gpa);
-            unset($financial);
-            unset($degree);
+        unset($first);
+        unset($last);
+        unset($id);
+        unset($email);
+        unset($phone);
+        unset($gpa);
+        unset($financial);
+        unset($degree);
         }
     } else {
         display_error_bucket($error_bucket);
     }
+} else {
+    // check for record id (primary key)
+    $pid = $_GET['pid'];
+    // now we need to query the database and get the data for the record
+    // note limit 1
+    $sql = "SELECT * FROM $db_table WHERE id=$pid LIMIT 1";
+    // query database
+    $result = $db->query($sql);
+    // get the one row of data
+    while($row = $result->fetch_assoc()) {
+        $first = $row['first_name'];
+        $last = $row['last_name'];
+        $id = $row['student_id'];
+        $email = $row['email'];
+        $phone = $row['phone'];
+        $degree = $row['degree_program'];
+        $gpa = $row['gpa'];
+        $financial = $row['financial_aid'];
+        
+    }
 }
-
-?>
