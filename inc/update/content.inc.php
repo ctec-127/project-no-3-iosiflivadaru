@@ -1,7 +1,6 @@
 <?php // Filename: connect.inc.php
 
 require __DIR__ . "/../db/mysqli_connect.inc.php";
-require __DIR__ . "/../functions/functions.inc.php";
 require __DIR__ . "/../app/config.inc.php";
 
 $error_bucket = [];

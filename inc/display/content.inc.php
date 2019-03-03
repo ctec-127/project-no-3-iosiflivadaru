@@ -1,7 +1,6 @@
-<?php // Filename: connect.inc.php
+<?php // Filename: content.inc.php
 
 require __DIR__ . "/../db/mysqli_connect.inc.php";
-require __DIR__ . "/../functions/functions.inc.php";
 
 $orderby = 'last_name';
 $filter = '';
