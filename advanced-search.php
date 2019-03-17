@@ -75,12 +75,6 @@ require 'inc/layout/header.inc.php';
 </div>
 
 <script>
-function showForm() {
-    $("#btn").removeClass("d-block");
-    $("#btn").addClass("d-none");
-    $("#advanceForm").removeClass("d-none");
-}
-
 function hideForm() {
     $("#advanceForm").addClass("d-none");
 }
