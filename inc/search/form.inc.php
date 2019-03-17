@@ -28,13 +28,13 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
 
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
     <label class="col-form-label" for="first">First Name </label>
-    <input class="form-control" type="text" id="first" name="first" value="<?php echo (isset($first) ? $first: '');?>">
+    <input class="form-control" type="text" id="first" name="first_name" value="<?php echo (isset($first) ? $first: '');?>">
     <br>
     <label class="col-form-label" for="last">Last Name </label>
-    <input class="form-control" type="text" id="last" name="last" value="<?php echo (isset($last) ? $last: '');?>">
+    <input class="form-control" type="text" id="last" name="last_name" value="<?php echo (isset($last) ? $last: '');?>">
     <br>
     <label class="col-form-label" for="id">Student ID </label>
-    <input class="form-control" type="text" id="id" name="id" value="<?php echo (isset($id) ? $id: '');?>">
+    <input class="form-control" type="text" id="id" name="student_id" value="<?php echo (isset($id) ? $id: '');?>">
     <br>
     <label class="col-form-label" for="email">Email </label>
     <input class="form-control" type="text" id="email" name="email" value="<?php echo (isset($email) ? $email: '');?>">
@@ -48,24 +48,24 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <br>
 
     <label class="col-form-label" for="date">Graduation Date </label>
-    <input class="form-control" type="date" id="date" name="grad_date" value="<?php echo (isset($grad_date) ? $grad_date: '');?>">
+    <input class="form-control" type="date" id="date" name="graduation_date" value="<?php echo (isset($grad_date) ? $grad_date: '');?>">
     <br>
 
     <label class="col-form-label">Financial Aid </label>
     <br>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="financial[]" id="inlineRadio1" value="1"<?=$option1;?>>
+        <input class="form-check-input" type="radio" name="financial_aid" id="inlineRadio1" value="1"<?=$option1;?>>
         <label class="form-check-label" for="inlineRadio1">Yes</label>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="financial[]" id="inlineRadio2" value="0"<?=$option2;?>>
+        <input class="form-check-input" type="radio" name="financial_aid" id="inlineRadio2" value="0"<?=$option2;?>>
         <label class="form-check-label" for="inlineRadio2">No</label>
     </div>
     <br><br>
     <label class="col-form-label">Degree Program</label>
     
-      <select class="custom-select mr-sm-2" name="degree">
-        <option hidden>Choose...</option>
+      <select class="custom-select mr-sm-2" name="degree_program">
+        <option disabled selected value hidden>Choose...</option>
 
         <!-- if the $degree is set, it will check on what the $program is set to, going thorough all the options below -->
 
@@ -77,7 +77,5 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
       </select>
     <br><br>
     <br>
-    <a href="display-records.php">Cancel</a>&nbsp;&nbsp;
-    <button class="btn btn-primary" type="submit">Save Record</button>
-    <input type="hidden" name="pid" value="<?php echo (isset($pid) ? $pid : '');?>">
+    <input class="btn btn-primary" name="search" type="submit">
 </form>
